@@ -3,8 +3,8 @@ from sshtunnel import SSHTunnelForwarder
 
 tunnel = SSHTunnelForwarder(
     ('fries.it.uu.se', 22),
-    ssh_username='Username',
-    ssh_password='Password',
+    ssh_username='Anv',
+    ssh_password='Pass',
     remote_bind_address=('127.0.0.1', 3306)
 )
 
@@ -150,7 +150,7 @@ try:
     
     mydb.commit()
 
-    mycursor.execute("SHOW DATABASES")
+    mycursor.execute("SHOW TABLES")
     for x in mycursor:
         print(x)
 
