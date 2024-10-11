@@ -17,6 +17,16 @@ connection = pymysql.connect(
     database='ht24_1_project_group_35'
 )
 
+def show_full_department_table():
+    mycursor = connection.cursor()
+    mycursor.execute("SELECT * FROM Department;")
+    departments = mycursor.fetchall()
+    print("Full Department Table:")
+    for row in departments:
+        print(row)
+    mycursor.close()
+
+
 def list_items(department_id):
     cur = connection.cursor()
     cur.execute("SELECT COUNT(*) FROM Department WHERE Parent_ID = %s", (department_id,))
@@ -30,7 +40,12 @@ def list_items(department_id):
             print(row)
     cur.close()
 
-list_items(int(input("Enter the department ID: ")))
+
+
+show_full_department_table()
+
+dept_id = int(input("Enter the department ID: "))
+list_items(dept_id)
 
 connection.close()
 tunnel.stop()

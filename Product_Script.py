@@ -17,6 +17,16 @@ connection = pymysql.connect(
     database='ht24_1_project_group_35'
 )
 
+
+def show_full_product_table():
+    mycursor = connection.cursor()
+    mycursor.execute("SELECT Product_Title, Sale_percentage FROM Product;")
+    products = mycursor.fetchall()
+    print("Product Name and Sale Percentage:")
+    for row in products:
+        print(f"Product: {row[0]}, Sale: {row[1]}%")
+    mycursor.close()
+
 def update_discount(product_id):
     cur = connection.cursor()
     cur.execute("SELECT Sale_percentage FROM Product WHERE Product_ID = %s", (product_id,))
@@ -31,7 +41,10 @@ def update_discount(product_id):
         print("Product not found")
     cur.close()
 
-update_discount(int(input("Enter the product ID: ")))
+
+show_full_product_table()
+product_id = int(input("Enter the product ID: "))
+update_discount(product_id)
 
 connection.close()
 tunnel.stop()
